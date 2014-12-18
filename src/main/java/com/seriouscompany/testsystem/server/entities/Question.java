@@ -3,29 +3,28 @@ package com.seriouscompany.testsystem.server.entities;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * @author Igor
- */
 @Entity
-@Table(name = "questions")
+@Table(name = "questions",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"formulation"})
+        }
+)
 public class Question {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
+    @Column(name = "question_id")
     private int id;
 
-    @Column(name = "formulations")
+    @Column(name = "formulation")
     private String formulation;
 
     @OneToMany(mappedBy = "question")
     private List<Answer> answers;
 
     @ManyToOne
+    @JoinColumn(name = "test_id")
     private Test test;
-
-    @Column(name = "correct_answer")
-    private int correctAnswer;
 
     public String getFormulation() {
         return formulation;
@@ -43,11 +42,11 @@ public class Question {
         this.answers = answers;
     }
 
-    public int getCorrectAnswer() {
-        return correctAnswer;
+    public Test getTest() {
+        return test;
     }
 
-    public void setCorrectAnswer(int correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public void setTest(Test test) {
+        this.test = test;
     }
 }
