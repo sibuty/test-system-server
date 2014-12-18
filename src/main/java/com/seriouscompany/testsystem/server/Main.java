@@ -1,16 +1,17 @@
 package com.seriouscompany.testsystem.server;
 
-import com.seriouscompany.testsystem.server.controller.entity.AnswerDAOImpl;
-import com.seriouscompany.testsystem.server.controller.entity.EntityDAO;
-import com.seriouscompany.testsystem.server.entities.Answer;
+import com.seriouscompany.testsystem.server.controller.entity.GenericDao;
+import com.seriouscompany.testsystem.server.controller.entity.UserDaoImpl;
+import com.seriouscompany.testsystem.server.entities.User;
 
 public class Main {
 
     public static void main(String[] args) {
-        EntityDAO<Answer> entityDAO = new AnswerDAOImpl();
-        Answer answer = new Answer();
-        answer.setContent("content");
+        GenericDao<User> entityDAO = new UserDaoImpl();
+        User user = new User();
+        user.setUserName("username");
+        user.setPassword("password");
 
-        entityDAO.create(answer);
+        entityDAO.save(user);
     }
 }

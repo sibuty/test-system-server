@@ -6,6 +6,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "answers")
+@NamedQueries({
+        @NamedQuery(name = "Answer.findAll",    query = "SELECT answer FROM Answer answer"),
+        @NamedQuery(name = "Answer.findById",   query = "SELECT answer FROM Answer answer where id = :id")
+})
 public class Answer {
 
     @Id

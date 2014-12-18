@@ -8,7 +8,7 @@ import java.util.Collection;
 @Entity
 @Table(name = "tests")
 @NamedQueries({
-        @NamedQuery(name = "Test.findAll", query = "SELECT test FROM Test test")
+        @NamedQuery(name = "Test.findAll",  query = "SELECT test FROM Test test")
 })
 public class Test {
 

@@ -4,7 +4,9 @@ import com.seriouscompany.testsystem.server.entities.Answer;
 import com.seriouscompany.testsystem.server.utils.HibernateUtil;
 import org.hibernate.Session;
 
-public class AnswerDAOImpl implements EntityDAO<Answer> {
+import java.util.List;
+
+public class AnswerDAOImpl implements GenericDao<Answer> {
 
     @Override
     public void delete(Answer entity) {
@@ -24,7 +26,26 @@ public class AnswerDAOImpl implements EntityDAO<Answer> {
     }
 
     @Override
-    public void create(Answer entity) {
+    public Answer find(Integer id) {
+        Answer answer = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            answer = (Answer) session.getNamedQuery("Answer.findById").setParameter("id", id).uniqueResult();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return answer;
+    }
+
+    @Override
+    public void save(Answer entity) {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -38,6 +59,26 @@ public class AnswerDAOImpl implements EntityDAO<Answer> {
                 session.close();
             }
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Answer> findAll() {
+        List<Answer> answers = null;
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            answers = (List<Answer>) session.getNamedQuery("Answer.findAll").list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return answers;
     }
 
 }
