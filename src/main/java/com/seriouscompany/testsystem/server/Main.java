@@ -19,17 +19,6 @@ public class Main {
                 JOptionPane.showMessageDialog(new JFrame(), ("2 правильных ответов из 2.\nТест пройден на 100%.\nВаша оценка — отлично."));
             }
         });
-        
-        
-//         java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Jframe().setVisible(true);
-//            }
-//        });
 
-//        Locale.setDefault(Locale.ENGLISH);
-//
-////        DBConnector.ex();      
-//        System.out.println(FromExcelParser.parseTest("123.xls"));
     }
 }
